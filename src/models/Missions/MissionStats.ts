@@ -1,7 +1,7 @@
 export enum MissionStats {
-    PENDENTE,
-    EXPIRADA,
-    EM_ANDAMENTO,
-    CONCLUÍDA,
-    FALHOU
+    PENDENTE = "Pendente",
+    EXPIRADA = "Expirada",
+    EM_ANDAMENTO = "Em andamento",
+    CONCLUÍDA = "Concluída",
+    FALHOU = "Falhou"
 }

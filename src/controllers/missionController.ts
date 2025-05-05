@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createMission, getMission } from "../services/missionServices";
+import { createMission, deleteMission, getMissions, updatedStatus } from "../services/missionServices";
 
 
 export function postMissionController(req: Request, res: Response): void {
@@ -14,5 +14,30 @@ export function postMissionController(req: Request, res: Response): void {
 }
 
 export function getMissionController(req: Request, res: Response): void {
-    res.status(200).json(getMission());
+    res.status(200).json(getMissions());
+}
+
+export function patchMissionStatusController(req: Request, res: Response): void {
+    const id = parseInt(req.params.id);
+    const { status } = req.body;
+    if (!id) {
+        res.status(400).json({ error: "ID inválido!" });
+        return;
+    }
+    if (!status) {
+        res.status(400).json({ error: "É necessário um status para definir!" });
+        return;
+    }
+    const updated = updatedStatus(id, status);
+    res.status(200).json({ updated });
+}
+
+export function deleteMissionController(req: Request, res: Response) {
+    const id = parseInt(req.params.id);
+    if (!id) {
+        res.status(400).json({error: "ID inválido!"});
+        return;
+    }
+    const deleted = deleteMission(id);
+    res.status(200).json({deleted});
 }
